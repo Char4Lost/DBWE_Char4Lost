@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Telefonbuch</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="container">
+        <img src="{{ url_for('static', filename='lost_title.jpg') }}" alt="Lost Titel" class="logo">
+
+        <h1>📖 Lost Telefonbuch</h1>
+        <div class="logout-link">
+         <a href="{{ url_for('logout') }}">🚪 Abmelden</a>
+        </div>
+
+        <p class="intro">Finde jeden Überlebenden... falls er noch lebt 🏝️</p>
+
+        <form method="POST">
+            <input type="text" name="name" placeholder="Namen suchen...">
+            <button type="submit" class="dharma-button">Suchen</button>
+        </form>
+
+        {% if personen %}
+            <h2>Suchergebnisse:</h2>
+            {% for person in personen %}
+                <div class="person">
+                    <strong>{{ person.name }}</strong><br>
+                    Adresse: {{ person.adresse }}<br>
+                    Telefon: {{ person.telefonnummer }}
+                </div>
+            {% endfor %}
+        {% elif request.method == 'POST' %}
+            <p>😢 Keine Person gefunden.</p>
+        {% endif %}
+        <hr>
+    <img src="{{ url_for('static', filename='lost_numbers.jpg') }}" alt="Lost Numbers" class="numbers-img">
+    </div>
+ </div>
+</body>
+</html>

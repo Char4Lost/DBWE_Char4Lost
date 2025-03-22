@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Lost Telefonbuch</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="container">
+
+        <div class="login-banner">
+            <img src="{{ url_for('static', filename='lost-login.jpg') }}" alt="Lost Login Banner">
+        </div>
+
+        <h1>🔐 Login</h1>
+        <p style="text-align:center; font-style: italic;">Willkommen zurück im Dharma-Netzwerk</p>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <p class="flash {{ category }}">{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+        <form method="POST">
+            <label for="username">Benutzername:</label>
+            <input type="text" name="username" required>
+
+            <label for="password">Passwort:</label>
+            <input type="password" name="password" required>
+
+            <button type="submit">Einloggen</button>
+        </form>
+
+        <p style="text-align:center;">Kein Account? <a href="{{ url_for('register') }}">Jetzt registrieren</a></p>
+    </div>
+     </div>
+</body>
+</html>
