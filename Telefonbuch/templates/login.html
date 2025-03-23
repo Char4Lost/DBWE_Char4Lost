@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Lost Telefonbuch</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+	<div class="page-wrapper">
+		<div class="container">
+
+			<!-- Bild für Login Seite -->
+			<div class="login-banner">
+				<img src="{{ url_for('static', filename='lost-login.jpg') }}" alt="Lost Login Banner">
+			</div>
+
+			<!-- Titel mit Text -->
+			<h1>🔐 Login</h1>
+			<p style="text-align:center; font-style: italic;">Willkommen im Dharma-Netzwerk, bitte anmelden</p>
+
+			<!-- Statusmeldungen -->
+			{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+			<div class="flash-container">
+			  {% for category, message in messages %}
+				<p class="flash {{ category }}">{{ message }}</p>
+			  {% endfor %}
+			</div>
+			{% endif %}
+			{% endwith %}
+
+			<!-- Login -->
+			<form method="POST">
+				<label for="username">Benutzername:</label>
+				<input type="text" name="username" required>
+
+				<label for="password">Passwort:</label>
+				<input type="password" name="password" required>
+
+				<button type="submit">Einloggen</button>
+			</form>
+			
+			<!-- Registrierung, Link zur Registrierung.html -->
+			<p style="text-align:center;">Noch kein Account? <a href="{{ url_for('register') }}">Jetzt registrieren</a></p>
+		</div>
+		</div>
+</body>
+</html>

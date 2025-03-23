@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrierung – Lost Telefonbuch</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="container">
+
+		<!-- Bild für Registrierung Seite -->
+        <div class="login-banner">
+            <img src="{{ url_for('static', filename='lost-register.jpg') }}" alt="Lost Registrierung Banner">
+        </div>
+
+		<!-- Titel mit Text -->
+        <h1>🧾 Registrierung</h1>
+        <p style="text-align:center; font-style: italic;">Willkommen bei der Dharma-Initiative</p>
+
+		<!-- Statusmeldungen -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-container">
+            {% for category, message in messages %}
+                <p class="flash {{ category }}">{{ message }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+		
+		<!-- Registrierung -->
+        <form method="POST" class="form-vertical">
+            <div class="form-group">
+                <label for="username">Benutzername</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-Mail-Adresse</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Passwort</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+			<!-- Knopf Registrierung -->
+            <button type="submit">Registrieren</button>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>
